@@ -1,7 +1,7 @@
 import pygame
 import sys
-from src.game import Game
-from src.constants import WINDOW_WIDTH, WINDOW_HEIGHT, TITLE, FPS
+from source.game import Game
+from source.constants import WINDOW_WIDTH, WINDOW_HEIGHT, TITLE, FPS
 
 def main():
     # Initialize Pygame
