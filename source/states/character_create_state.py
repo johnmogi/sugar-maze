@@ -14,7 +14,7 @@ class CharacterCreateState(BaseState):
         self.character = {
             "class": random.choice(list(CLASSES.keys())),
             "stats": {},
-            "equipment": ["Basic Sword", "Leather Armor"]
+            "equipment": ["⚔️ Basic Sword", "🛡️ Leather Armor"]
         }
         self.character["stats"] = CLASSES[self.character["class"]]
 
@@ -29,7 +29,7 @@ class CharacterCreateState(BaseState):
 
     def draw(self, screen):
         # Draw title
-        title = self.title_font.render("Character Creation", True, WHITE)
+        title = self.title_font.render("✨ Character Creation ✨", True, WHITE)
         screen.blit(title, ((WINDOW_WIDTH - title.get_width()) // 2, 50))
 
         # Draw character info
@@ -39,12 +39,12 @@ class CharacterCreateState(BaseState):
         
         y += 50
         for stat, value in self.character["stats"].items():
-            stat_text = self.font.render(f"{stat.capitalize()}: {value}", True, WHITE)
+            stat_text = self.font.render(f"{EMOJI_STATS[stat]} {stat.capitalize()}: {value}", True, WHITE)
             screen.blit(stat_text, (50, y))
             y += 30
 
         y += 20
-        equipment_title = self.font.render("Equipment:", True, WHITE)
+        equipment_title = self.font.render("🎒 Equipment:", True, WHITE)
         screen.blit(equipment_title, (50, y))
         y += 30
         for item in self.character["equipment"]:
@@ -54,9 +54,9 @@ class CharacterCreateState(BaseState):
 
         # Draw instructions
         instructions = [
-            "SPACE - Reroll Character",
-            "ENTER - Start Game",
-            "ESC - Back to Menu"
+            "🎲 SPACE - Reroll Character",
+            "✅ ENTER - Start Game",
+            "🔙 ESC - Back to Menu"
         ]
         y = WINDOW_HEIGHT - 120
         for instruction in instructions:

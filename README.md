@@ -1,5 +1,7 @@
 # Sugarbound: The Labyrinth of Sweets
 
+![Game Cover](pics/6155dd19-de40-4bb4-9f4a-7f95a5938bd9.jpg)
+
 A 2D RPG Dungeon Crawler with a sweet twist! Navigate through a maze filled with sugary monsters, collect loot, and survive using a unique dice-based combat system.
 
 ## Features

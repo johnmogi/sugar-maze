@@ -6,10 +6,10 @@ class SplashState(BaseState):
     def __init__(self, game):
         super().__init__(game)
         self.font = pygame.font.Font(None, 74)
-        self.title_text = self.font.render("SUGARBOUND", True, WHITE)
+        self.title_text = self.font.render("🍭 SUGARBOUND 🍬", True, WHITE)
         self.subtitle_font = pygame.font.Font(None, 36)
-        self.subtitle_text = self.subtitle_font.render("The Labyrinth of Sweets", True, PINK)
-        self.start_text = self.subtitle_font.render("Press SPACE to Start", True, GRAY)
+        self.subtitle_text = self.subtitle_font.render("✨ The Labyrinth of Sweets ✨", True, PINK)
+        self.start_text = self.subtitle_font.render("🎮 Press SPACE to Start 🎮", True, GRAY)
         self.timer = 0
 
     def handle_event(self, event):

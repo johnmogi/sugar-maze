@@ -6,9 +6,9 @@ from ..constants import *
 class GameState(BaseState):
     def __init__(self, game):
         super().__init__(game)
-        self.font = pygame.font.Font(None, 36)
-        self.grid = [['?' for _ in range(GRID_SIZE)] for _ in range(GRID_SIZE)]
-        self.grid[1][1] = 'S'  # Starting position
+        self.font = pygame.font.Font(None, 48)  # Increased font size for emojis
+        self.grid = [[EMOJI_UNKNOWN for _ in range(GRID_SIZE)] for _ in range(GRID_SIZE)]
+        self.grid[1][1] = EMOJI_START  # Starting position
         self.player_pos = [1, 1]
 
     def handle_event(self, event):
@@ -30,8 +30,13 @@ class GameState(BaseState):
 
     def move_player(self, new_pos):
         # Reveal the new room
-        if self.grid[new_pos[0]][new_pos[1]] == '?':
-            self.grid[new_pos[0]][new_pos[1]] = random.choice(['M', 'T', 'L', 'E'])
+        if self.grid[new_pos[0]][new_pos[1]] == EMOJI_UNKNOWN:
+            self.grid[new_pos[0]][new_pos[1]] = random.choice([
+                EMOJI_MONSTER,
+                EMOJI_TRAP,
+                EMOJI_LOOT,
+                EMOJI_EMPTY
+            ])
         self.player_pos = new_pos
 
     def draw(self, screen):
@@ -55,17 +60,25 @@ class GameState(BaseState):
                 text_y = y + (cell_size - text.get_height()) // 2
                 screen.blit(text, (text_x, text_y))
 
+                # Draw player on current position
+                if [i, j] == self.player_pos:
+                    player = self.font.render(EMOJI_PLAYER, True, WHITE)
+                    player_x = x + (cell_size - player.get_width()) // 2
+                    player_y = y + (cell_size - player.get_height()) // 2
+                    screen.blit(player, (player_x, player_y))
+
         # Draw legend
         legend = [
-            "S - Start",
-            "M - Monster",
-            "T - Trap",
-            "L - Loot",
-            "E - Empty",
-            "? - Unknown"
+            f"{EMOJI_START} - Start",
+            f"{EMOJI_MONSTER} - Monster",
+            f"{EMOJI_TRAP} - Trap",
+            f"{EMOJI_LOOT} - Loot",
+            f"{EMOJI_EMPTY} - Empty",
+            f"{EMOJI_UNKNOWN} - Unknown",
+            f"{EMOJI_PLAYER} - Player"
         ]
         legend_y = start_y + (GRID_SIZE * cell_size) + 20
         for text in legend:
             rendered_text = self.font.render(text, True, GRAY)
             screen.blit(rendered_text, (start_x, legend_y))
-            legend_y += 30
+            legend_y += 40  # Increased spacing for better readability
